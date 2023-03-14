@@ -14,22 +14,23 @@ class ArticlesController extends AbstractController
     public function index(JeuxRepository $JeuxRepository): Response
     {
         $jeux = $JeuxRepository->findAll();
-        dd($jeux);
+         /* dd($jeux) ; */
         return $this->render('articles/index.html.twig', [
-            'controller_name' => 'ArticlesController',
+            'jeux' => $jeux,
         ]);
     }
 
     #[Route('/article/{id}', name: 'article')]
     public function showArticle(JeuxRepository $JeuxRepository, $id): Response
     {
-        $jeu = $JeuxRepository->findBy(array('id' => $id));
-        dd($jeu);
+        $jeu = $JeuxRepository->find(array('id' => $id));
+        /* dd($jeu) */; 
         if (!$jeu) {
             throw $this->createNotFoundException('Jeux non trouvé');
-        }
-        return $this->render('articles/article.html.twig', [
-            'controller_name' => 'ArticlesController',
+        }else{
+             return $this->render('articles/article.html.twig', [
+            'jeu' => $jeu,
         ]);
+        }
     }
 }

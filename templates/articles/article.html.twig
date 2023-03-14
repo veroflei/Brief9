@@ -1,13 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jeux{% endblock %}
+{% block title %} {{ jeu.titre }} {% endblock %}
 
 {% block body %}
-    
+
     {% include "header.html.twig" %}
 
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>{{ jeu.titre }}</h1>
+            </div>
+        </div>
+    </div>
 
-    <h1>Jeux {}</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center g-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+          <div class="col-md-12 ">
+            <div class="card mb-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="{{'/' ~ jeu.image}}" class="img-fluid" alt="Image">
+                </div>
+                <div class="col-md-6 ">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">{{ jeu.titre }}</h5>
+                    <p class="card-text">{{ jeu.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body text-center">
+                <h5 class="card-title">Note : {{ jeu.notemoyenne }}</h5>
+                <a href="{{ jeu.url }}" class="btn btn-secondary">Acheter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
 
     {% include "footer.html.twig" %}
 

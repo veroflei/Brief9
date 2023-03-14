@@ -7,3 +7,7 @@ controllers:
 homepage:
     path: /
     controller: App\Controller\HomeController
+
+articles:
+    path: /articles
+    controller: App\Controller\ArticlesController
