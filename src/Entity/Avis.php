@@ -23,7 +23,7 @@ class Avis
     private ?bool $moderation = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
-    private ?utilisateur $utilisateur = null;
+    private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?Jeux $jeux = null;
