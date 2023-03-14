@@ -22,7 +22,10 @@
                 {{ form_row(registrationForm.RGPDConsent) }}
                 
            
-            <button type="submit" class="btn btn-lg btn-primary mt-3">S'inscrire</button>
+                <div class="d-flex justify-content-center gap-5 mt-3">
+                    <button type="submit" class="btn btn-lg btn-primary">S'inscrire</button>
+                    <a href="{{ path('app_login') }}" class="btn btn-lg btn-secondary">Me connecter</a>
+                </div>
                 
             {{ form_end(registrationForm) }} 
             {{ form_rest(registrationForm) }}  
