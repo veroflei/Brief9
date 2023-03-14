@@ -34,7 +34,7 @@ class Jeux
     #[ORM\OneToMany(mappedBy: 'jeux', targetEntity: Avis::class)]
     private Collection $avis;
 
-    #[ORM\ManyToMany(targetEntity: categorie::class, inversedBy: 'jeuxes')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'jeuxes')]
     private Collection $categorie;
 
     public function __construct()
