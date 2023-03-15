@@ -5,17 +5,26 @@
 {% block body %}
     {% include "header.html.twig" %}
 
+    <div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+      <div class="row">
+          <div class="col-12 text-center">
+              <H1 class="title">Tous nos jeux</H1>
+          </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
-        <div class="row row-cols-1 row-cols-md-3 g-5">
+        <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center">
           {% for jeu in jeux %}
             <div class="col">
               <div class="card h-100 d-flex" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                 <img src="{{ '/' ~ jeu.image }}" class="card-img-top" alt="{{ jeu.titre }}">
                 <div class="card-body">
-                  <h5 class="card-title h-10">{{ jeu.titre }}</h5>
+                  <h5 class="card-title">{{ jeu.titre }}</h5>
                   <p class="card-text h-">{{ jeu.description|slice(0, 100) ~ '...' }}</p>
                   <p class="card-text">Note : {{ jeu.notemoyenne }}/10</p>
                   <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary">Voir la fiche du jeu</a>
+                  <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary">Ajouter Jeu </a>
                 </div>
               </div>
             </div>
