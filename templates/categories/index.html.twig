@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+
+{% include "header.html.twig" %}
+
+    <div class="container mt-5">
+        <div class="row">
+            {% for categorie in categories %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="{{ path('categories_categorie', {'id': categorie.id}) }}">
+                            <img class="card-img-top img-fluid" style="height:80%;" src="{{'/' ~ categorie.image}}" alt="{{ categorie.titre }}">
+                        </a>
+                        <div class="card-body" style="height:10%;">
+                            <h5 class="card-title text-center">{{ categorie.titre }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include "footer.html.twig" %}
+
+{% endblock %}

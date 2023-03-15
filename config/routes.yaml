@@ -11,3 +11,7 @@ homepage:
 articles:
     path: /articles
     controller: App\Controller\ArticlesController
+
+categories:
+    path: /categories
+    controller: App\Controller\CategorieController

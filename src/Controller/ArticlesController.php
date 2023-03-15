@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\JeuxRepository;
+use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +15,6 @@ class ArticlesController extends AbstractController
     public function index(JeuxRepository $JeuxRepository): Response
     {
         $jeux = $JeuxRepository->findAll();
-         /* dd($jeux) ; */
         return $this->render('articles/index.html.twig', [
             'jeux' => $jeux,
         ]);
