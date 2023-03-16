@@ -15,3 +15,15 @@ articles:
 categories:
     path: /categories
     controller: App\Controller\CategorieController
+
+admin:
+    path: /admin
+    controller: App\Controller\AdminController
+    
+admin_nouveau:
+    path: /admin/nouveau
+    controller: App\Controller\AdminController::newJeu
+
+profil:
+    path: /profil
+    controller: App\Controller\ProfilController
