@@ -84,31 +84,57 @@ class AdminController extends AbstractController
     }
 
 
-    #[Route('/editer/{id}', name: 'editer_', methods: ['GET', 'POST'])]
+    #[Route('/editer/{id}', name: 'editer', methods: ['GET', 'POST'])]
     public function editer(
         JeuxRepository $repository, 
-        int $id, 
+        $id, 
         Request $request, 
-        EntityManagerInterface $manager) : Response
+        EntityManagerInterface $manager
+        ) : Response
     {
         $jeux= $repository->find(array('id' => $id));
+        /* dd($jeux); */
         $form = $this -> createForm(JeuxType::class, $jeux);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->flush();
+        $manager->flush();
 
-            $this->addFlash(
-                'success',
-                'Jeux modifié avec succès!'
-            );
+        $this->addFlash(
+            'success',
+            'Jeux modifié avec succès!'
+        );
 
-            return $this->redirectToRoute('admin_index');
-        }
+        return $this->redirectToRoute('admin_index');
+    }
 
         return $this->render('admin/editer.html.twig', [
             'form' => $form->createView()
         ]);
-}
+    }
+
+
+    #[Route('/supprimer/{id}', name: 'supprimer', methods: ['POST'])]
+    public function supprimer(
+        EntityManagerInterface $manager, 
+        Jeux $jeux
+        ) : Response
+    {
+        if(!$jeux){
+            $this->addFlash(
+                'warning',
+                'Le jeux n\a pas été trouvé !'
+            );
+            return $this->render('admin_index');
+        }
+        $manager->remove($jeux);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Jeux supprimé avec succès!'
+        );
+        return $this->redirectToRoute('admin_index');
+    }
        
 } 
