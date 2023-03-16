@@ -22,7 +22,11 @@ admin:
     
 admin_nouveau:
     path: /admin/nouveau
-    controller: App\Controller\AdminController::newJeu
+    controller: App\Controller\AdminController::new
+
+admin_editer:
+    path: /admin/editer
+    controller: App\Controller\AdminController::editer
 
 profil:
     path: /profil

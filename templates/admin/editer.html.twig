@@ -8,9 +8,9 @@
 
 <div class="container mt-5">
     
-    <h1 class="mt-4 text-center title">Ajout d'un jeu</h1>
+    <h1 class="mt-4 text-center title">Editer un jeu</h1>
 
-    {{ form_start(form) }}
+     {{ form_start(form) }}
 
     <div class="form-group">
         {{ form_label(form.titre) }}
@@ -56,15 +56,14 @@
     </div>
 
     </div>
-{{ form_end(form) }}
-</div>
+    {{ form_end(form) }}
+</div> 
 
 <div class="row mt-5">
     <div class="col-12 d-flex justify-content-center">
         <a style="text-decoration:none; color:rgb(201, 35, 35)" class="text" href="{{ path('admin_index') }}"><i class="bi bi-arrow-left-circle fs-4 align-middle"></i></span> Retour</a>
     </div>
 </div>
-
 
 {% include "footer.html.twig" %}
 

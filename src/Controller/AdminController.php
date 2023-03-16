@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Regex;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
@@ -81,5 +82,33 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    #[Route('/editer/{id}', name: 'editer_', methods: ['GET', 'POST'])]
+    public function editer(
+        JeuxRepository $repository, 
+        int $id, 
+        Request $request, 
+        EntityManagerInterface $manager) : Response
+    {
+        $jeux= $repository->find(array('id' => $id));
+        $form = $this -> createForm(JeuxType::class, $jeux);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Jeux modifié avec succès!'
+            );
+
+            return $this->redirectToRoute('admin_index');
+        }
+
+        return $this->render('admin/editer.html.twig', [
+            'form' => $form->createView()
+        ]);
+}
        
 } 
