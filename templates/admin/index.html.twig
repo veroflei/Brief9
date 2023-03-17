@@ -19,6 +19,13 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-3 m-b5">
+            <div class="col-12">
+                <div class="count">
+                  <a href="{{ path('admin_nouveau') }}" class="btn btn-secondary">Ajouter un nouveau Jeu</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     {% for message in app.flashes('success')%} 
@@ -52,9 +59,8 @@
                   <td>{{ jeu.notemoyenne }}</td>
                   <td><a href="{{ jeu.url }}" target="_blank">{{ jeu.url|slice(0, 40) ~ '...' }}</a></td>
                   <td>
-                    <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary btn-sm"><i class="bi bi-eye"></i></a>
+                    <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-success btn-sm"><i class="bi bi-eye"></i></a>
                     <a href="{{ path('admin_editer', {'id': jeu.id}) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></a>
-                    <a href="{{ path('admin_nouveau') }}" class="btn btn-success btn-sm"><i class="bi bi-plus"></i></a>
                     <a href="{{ path('admin_supprimer', {'id': jeu.id}) }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                 </td>
                 </tr>

@@ -16,9 +16,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 
 #[Route('/admin', name: 'admin_')]
+#[IsGranted('ROLE_ADMIN')]
+
 class AdminController extends AbstractController
 {
 
@@ -32,6 +36,7 @@ class AdminController extends AbstractController
      */
 
     #[Route('/', name: 'index', methods: ['GET'])]
+
     public function index(JeuxRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
 
@@ -56,35 +61,46 @@ class AdminController extends AbstractController
      * @return Response
      */
     #[Route('/nouveau', name: 'nouveau_', methods: ['GET', 'POST'])] /* Soumission du formulaire en POST */
-    public function new(
-        Request $request,
-        EntityManagerInterface $manager
-        ): Response
+    public function new(Request $request, EntityManagerInterface $manager, CategorieRepository $categorieRepository): Response
     {
-        $jeux= new Jeux;
-        $form = $this -> createForm(JeuxType::class, $jeux);
-       /*  dd($form); */
-
-        $form -> handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $jeux=$form->getData(); /* dd($form->getData());*/
+        $jeux = new Jeux();
+        $form = $this->createForm(JeuxType::class, $jeux);
+        $categorie = $categorieRepository->findAll();
+  
+    
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $jeux = $form->getData();
+            $tabCategorieId = $form->get('categorie')->getData();
+          /*   dd($form->getData('categorie')); */
+          $tmp = array();
+            foreach($tabCategorieId as $categorie){
+                $categories = $categorieRepository->find(array('id' => $categorie));
+                array_push($tmp, $categories);
+                $jeux->addCategorie($categories);
+            }
+            
             $manager->persist($jeux);
             $manager->flush();
-
             $this->addFlash(
                 'success',
                 'Jeux ajouté avec succès!'
             );
 
             return $this->redirectToRoute('admin_index');
-        } 
+        }
+
         return $this->render('admin/nouveau.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $categorie
         ]);
     }
+    
 
-
+    
     #[Route('/editer/{id}', name: 'editer', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function editer(
         JeuxRepository $repository, 
         $id, 
@@ -113,8 +129,9 @@ class AdminController extends AbstractController
         ]);
     }
 
-
+    
     #[Route('/supprimer/{id}', name: 'supprimer', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function supprimer(
         EntityManagerInterface $manager, 
         Jeux $jeux

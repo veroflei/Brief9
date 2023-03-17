@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Jeux;
+use App\Repository\JeuxRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Categorie;
+use App\Repository\CategorieRepository;
 use App\Repository\JeuxRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -153,6 +155,13 @@ class Jeux
         if (!$this->categorie->contains($categorie)) {
             $this->categorie->add($categorie);
         }
+
+        return $this;
+    }
+
+    public function setCategorie(Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

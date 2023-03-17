@@ -22,3 +22,7 @@ services:
 
     App\Security\Voter\AdminAccessVoter:
         tags: [security.voter]
+
+    App\Form\JeuxType:
+        arguments:
+            $categorieRepository: '@App\Repository\CategorieRepository'
