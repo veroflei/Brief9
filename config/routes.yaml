@@ -16,7 +16,7 @@ categories:
     path: /categories
     controller: App\Controller\CategorieController
 
-admin:
+admin: 
     path: /admin
     controller: App\Controller\AdminController
     
@@ -34,4 +34,8 @@ admin_supprimer:
 
 profil:
     path: /profil
+    controller: App\Controller\ProfilController
+
+profil_ajouter:
+    path: /profil/ajouter/{id}
     controller: App\Controller\ProfilController

@@ -1,12 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Mon Compte{% endblock %}
 
 {% block body %}
 
 {% include "header.html.twig" %}
 
-    <h1>espace user</h1>
+<div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+    <div class="row">
+        <div class="col-12 text-center">
+            <H1 class="title">mes jeux favoris</H1>
+        </div>
+    </div>
+  </div>
+        
+<table class="table">
+    <theat>
+        <tr>
+            <th>Image</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Note</th>
+            <th>URL d'achat</th>
+            <th>Quantités</th>
+            <th>Action</th>
+        </tr>
+    </theat>
+</table>
 
 {% include "footer.html.twig" %}
 
