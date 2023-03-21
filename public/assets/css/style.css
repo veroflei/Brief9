@@ -34,3 +34,17 @@ body{
     transition: all ease 0.5s;
     color: rgb(214, 176, 23);
   }
+
+.user-tr{
+  margin-bottom: 10px;
+}
+
+.user-td{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+}

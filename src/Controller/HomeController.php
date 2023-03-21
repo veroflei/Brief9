@@ -5,14 +5,17 @@ namespace App\Controller;
 use App\Repository\CategorieRepository;
 use App\Repository\JeuxRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController{
 
     #[Route('/', name: 'home')]
-    public function index(JeuxRepository $jeuxRepository, CategorieRepository $categorieRepository): Response {
+    public function index(JeuxRepository $jeuxRepository, CategorieRepository $categorieRepository, SessionInterface $session, Request $request): Response {
         
+        $session = $request -> getSession();
         // Récupérer une catégorie aléatoire
         $categories = $categorieRepository->findAll();
         if (!empty($categories)) {

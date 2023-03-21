@@ -34,8 +34,16 @@ admin_supprimer:
 
 profil:
     path: /profil
-    controller: App\Controller\ProfilController
+    controller: App\Controller\ProfilController::index
 
 profil_ajouter:
     path: /profil/ajouter/{id}
-    controller: App\Controller\ProfilController
+    controller: App\Controller\ProfilController::ajouterJeu
+
+profil_supprimer:
+    path: /profil/supprimer/{id}
+    controller: App\Controller\ProfilController::supprimerJeu
+
+profil_vider:
+    path: /profil/vider
+    controller: App\Controller\ProfilController::vider
