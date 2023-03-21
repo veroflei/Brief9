@@ -2,35 +2,33 @@
 
 {% block body %}
 
-    {% include "header.html.twig" %}
-    
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 text-center">
-                {% block title %} <H1 class="title">Bienvenue sur notre site pour collections vos jeux videos préférés</H1> {% endblock %}
-            </div>
-        </div>
+{% include "header.html.twig" %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 text-center">
+      {% block title %} <H1 class="title">Bienvenue sur notre site pour collections vos jeux videos préférés</H1> {%
+      endblock %}
     </div>
+  </div>
+</div>
 
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <p>Retrouvez ici les derniers jeux à la une</p>
-            </div>
-        </div>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12 text-center">
+      <p>Retrouvez ici les derniers jeux à la une</p>
     </div>
+  </div>
+</div>
 
-    
-    
-    
-
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           {% for jeu in jeux %}
-          <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if loop.first
+            %}class="active" {% endif %}></li>
           {% endfor %}
         </ol>
         <div class="carousel-inner">
@@ -40,7 +38,8 @@
             <div class="carousel-caption d-none d-md-block">
               <h5>{{ jeu.titre }}</h5>
               <p>{{ jeu.description }}</p>
-              <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary stretched-link">Voir le jeu</a>
+              <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary stretched-link">Voir le
+                jeu</a>
             </div>
           </div>
           {% endfor %}
@@ -54,11 +53,11 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-            </div>
-        </div>
     </div>
-    
-    
-    {% include "footer.html.twig" %}
+  </div>
+</div>
+
+
+{% include "footer.html.twig" %}
 
 {% endblock %}

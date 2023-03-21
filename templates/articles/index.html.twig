@@ -3,53 +3,53 @@
 {% block title %}Jeux{% endblock %}
 
 {% block body %}
-    {% include "header.html.twig" %}
+{% include "header.html.twig" %}
 
-    <div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-      <div class="row">
-          <div class="col-12 text-center">
-              <H1 class="title">Tous nos jeux</H1>
-          </div>
-      </div>
+<div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+  <div class="row">
+    <div class="col-12 text-center">
+      <H1 class="title">Tous nos jeux</H1>
     </div>
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-12">
-          {% for message in app.flashes('success-user')%} 
-          <div class="alert alert-success text-center">
-              {{ message }}
-          </div>
-          {% endfor %}
-          {% for message in app.flashes('warning-user')%} 
-          <div class="alert alert-warning text-center">
-              {{ message }}
-          </div>
-          {% endfor %}
-          
+  </div>
+</div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      {% for message in app.flashes('success-user')%}
+      <div class="alert alert-success text-center">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% for message in app.flashes('warning-user')%}
+      <div class="alert alert-warning text-center">
+        {{ message }}
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center">
+    {% for jeu in jeux %}
+    <div class="col">
+      <div class="card h-100 d-flex" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+        <img src="{{ '/' ~ jeu.image }}" class="card-img-top" alt="{{ jeu.titre }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ jeu.titre }}</h5>
+          <p class="card-text h-">{{ jeu.description|slice(0, 100) ~ '...' }}</p>
+          <p class="card-text">Note : {{ jeu.notemoyenne }}/10</p>
+          <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary btn-sm">Voir la fiche du
+            jeu</a>
+          <a href="{{ path('profil_ajouter', {'id': jeu.id}) }}" class="btn btn-light btn-sm">Ajouter Jeu </a>
         </div>
       </div>
     </div>
-    
+    {% endfor %}
+  </div>
+</div>
 
-    <div class="container mt-5">
-        <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center">
-          {% for jeu in jeux %}
-            <div class="col">
-              <div class="card h-100 d-flex" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                <img src="{{ '/' ~ jeu.image }}" class="card-img-top" alt="{{ jeu.titre }}">
-                <div class="card-body">
-                  <h5 class="card-title">{{ jeu.titre }}</h5>
-                  <p class="card-text h-">{{ jeu.description|slice(0, 100) ~ '...' }}</p>
-                  <p class="card-text">Note : {{ jeu.notemoyenne }}/10</p>
-                  <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary btn-sm">Voir la fiche du jeu</a>
-                  <a href="{{ path('profil_ajouter', {'id': jeu.id}) }}" class="btn btn-light btn-sm">Ajouter Jeu </a>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-    {% include "footer.html.twig" %}
+{% include "footer.html.twig" %}
 {% endblock %}
-

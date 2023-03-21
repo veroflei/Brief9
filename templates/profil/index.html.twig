@@ -13,16 +13,16 @@
     </div>
   </div>
 </div>
-        
+
 <div class="container mt-5 ">
   <div class="row">
     <div class="col-md-12 ">
       <div class="col-md-12 text-center">
         {% if favoris is empty %}
-          <p>Aucun jeu en favori.</p>
+        <p>Aucun jeu en favori.</p>
         {% else %}
       </div>
-      
+
       <table class="table table-striped mt-3">
         <thead>
           <tr>
@@ -34,22 +34,25 @@
         </thead>
         <tbody>
           {% for favori in favoris %}
-            <tr class="user-tr">
-              <td class="mb-2"><img src="{{'/' ~ favori.image}}" alt="{{ favori.titre }}"></td>
-              <td class="user-td">{{ favori.titre }}</td>
-              <td class="user-td">{{ favori.description }}</td>
-              <td class="user-td">
-                <a href="{{ path('articles_article', {'id': favori.id}) }}" class="btn btn-secondary btn-sm action-buttons"><i class="bi bi-eye"></i></a>
-                <a href="{{ path('profil_supprimer', {'id': favori.id}) }}" class="btn btn-danger btn-sm action-buttons mt-4"><i class="bi bi-trash"></i></a>
-              </td>
-            </tr>
+          <tr class="user-tr">
+            <td class="mb-2"><img src="{{'/' ~ favori.image}}" alt="{{ favori.titre }}"></td>
+            <td class="user-td">{{ favori.titre }}</td>
+            <td class="user-td">{{ favori.description }}</td>
+            <td class="user-td">
+              <a href="{{ path('articles_article', {'id': favori.id}) }}"
+                class="btn btn-secondary btn-sm action-buttons"><i class="bi bi-eye"></i></a>
+              <a href="{{ path('profil_supprimer', {'id': favori.id}) }}"
+                class="btn btn-danger btn-sm action-buttons mt-4"><i class="bi bi-trash"></i></a>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
       {% endif %}
     </div>
     <div class="col-12 d-flex justify-content-center mt-5">
-      <a href="{{ path('profil_vider') }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Vider tous mes jeux</a>
+      <a href="{{ path('profil_vider') }}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Vider tous mes
+        jeux</a>
     </div>
   </div>
 </div>

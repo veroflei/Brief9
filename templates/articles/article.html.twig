@@ -4,48 +4,48 @@
 
 {% block body %}
 
-    {% include "header.html.twig" %}
+{% include "header.html.twig" %}
 
-    <div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 class="title">{{ jeu.titre }}</h1>
-            </div>
-        </div>
+<div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 class="title">{{ jeu.titre }}</h1>
     </div>
+  </div>
+</div>
 
-    <div class="container mt-5">
-      <hr>
-        <div class="row justify-content-center mt-4 g-5">
-          <div class="col-md-12 ">
-            <div class="card mb-3" transition: all ease-in 1s;>
-              <div class="row">
-                <div class="col-md-6">
-                  <img src="{{'/' ~ jeu.image}}" class="img-fluid" alt="Image">
-                </div>
-                <div class="col-md-6 ">
-                  <div class="card-body" transition: all ease-in 1s;>
-                    <h5 class="card-title text-center">{{ jeu.titre }}</h5>
-                    <p class="card-text">{{ jeu.description }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="container mt-5">
+  <hr>
+  <div class="row justify-content-center mt-4 g-5">
+    <div class="col-md-12 ">
+      <div class="card mb-3" transition: all ease-in 1s;>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="{{'/' ~ jeu.image}}" class="img-fluid" alt="Image">
           </div>
-          
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body text-center">
-                <h5 class="card-title">Note : {{ jeu.notemoyenne }}</h5>
-                <a href="{{ jeu.url }}" class="btn btn-secondary">Acheter</a>
-              </div>
+          <div class="col-md-6 ">
+            <div class="card-body" transition: all ease-in 1s;>
+              <h5 class="card-title text-center">{{ jeu.titre }}</h5>
+              <p class="card-text">{{ jeu.description }}</p>
             </div>
           </div>
         </div>
       </div>
-      
+    </div>
+
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Note : {{ jeu.notemoyenne }}</h5>
+          <a href="{{ jeu.url }}" class="btn btn-secondary">Acheter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-    {% include "footer.html.twig" %}
+
+{% include "footer.html.twig" %}
 
 {% endblock %}
