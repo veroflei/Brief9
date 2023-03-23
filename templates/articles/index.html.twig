@@ -41,9 +41,10 @@
           <h5 class="card-title">{{ jeu.titre }}</h5>
           <p class="card-text h-">{{ jeu.description|slice(0, 100) ~ '...' }}</p>
           <p class="card-text">Note : {{ jeu.notemoyenne }}/10</p>
-          <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary btn-sm">Voir la fiche du
-            jeu</a>
-          <a href="{{ path('profil_ajouter', {'id': jeu.id}) }}" class="btn btn-light btn-sm">Ajouter Jeu </a>
+            <div class="d-flex justify-space-between mx-auto">
+              <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary btn-sm">Voir la fiche du jeu</a>
+              <a href="{{ path('profil_ajouter', {'id': jeu.id}) }}" class="btn btn-light btn-sm">Ajouter Jeu </a>
+            </div>
         </div>
       </div>
     </div>

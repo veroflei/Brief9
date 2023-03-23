@@ -2,6 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Avis;
+use App\Repository\AvisRepository;
+use App\Form\AvisType;
+use App\Entity\Jeux;
+use App\Entity\Utilisateur;
+use App\Form\CommentsType;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Security;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\JeuxRepository;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,16 +31,42 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/article/{id}', name: 'article')]
-    public function showArticle(JeuxRepository $JeuxRepository, $id): Response
-    {
-        $jeu = $JeuxRepository->find(array('id' => $id));
-        /* dd($jeu) */; 
+    public function showArticle(
+        JeuxRepository $JeuxRepository, 
+        AvisRepository $avisRepository,
+        EntityManagerInterface $entityManager, 
+        Request $request,
+        Security $security,
+        $id
+    ): Response {
+        $jeu = $JeuxRepository->find($id);
+    
         if (!$jeu) {
             throw $this->createNotFoundException('Jeux non trouvé');
-        }else{
-             return $this->render('articles/article.html.twig', [
-            'jeu' => $jeu,
-        ]);
         }
+    
+        $avis = new Avis();
+        $avis->setUtilisateur($security->getUser());
+        $avis->setJeux($jeu);
+        /* dd($avis); */
+        $avisForm = $this->createForm(AvisType::class, $avis);
+        $avisForm->handleRequest($request);
+    
+        if ($avisForm->isSubmitted() && $avisForm->isValid()) {
+            $avis->setJeux($jeu);
+            $entityManager->persist($avis);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('articles_article', ['id' => $id]);
+        }
+    
+        $commentaires = $avisRepository->findBy(['jeux' => $jeu]);
+        /* dd($commentaires);  */
+    
+        return $this->render('articles/article.html.twig', [
+            'jeu' => $jeu,
+            'avisForm' => $avisForm->createView(),
+            'commentaires' => $commentaires
+        ]);
     }
 }

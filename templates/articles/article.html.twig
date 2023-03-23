@@ -41,6 +41,54 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-12">
+      <div class="card commentaire">
+        <div class="card-body text-center">
+             {% for commentaire in commentaires %}
+             <h5>{{ commentaire.utilisateur.pseudo }}</h5>
+             <hr>
+            <div class="avis">
+              <div class="note">
+                <h4>{{ commentaire.note }} / 10</h4>
+              </div>
+              <div class="description">
+                <p>{{ commentaire.description }}</p>
+              </div>
+            </div>
+            {% endfor %} 
+        </div>
+      </div>
+    </div>
+       
+    <div class="col-md-12">
+      <div class="card add--commentaire">
+          <div class="card-body text-center">
+            <h2 class="card-title">Ajouter un commentaire</h2>
+            <hr>
+            {{ form_start(avisForm) }}
+            <div class="form-group">
+              {{ form_label(avisForm.utilisateur) }}
+              {{ form_widget(avisForm.utilisateur) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_label(avisForm.note) }}
+              {{ form_widget(avisForm.note) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_label(avisForm.description) }}
+              {{ form_widget(avisForm.description) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_widget(avisForm.envoyer) }}
+            </div>
+            {{ form_end(avisForm) }}
+          </div>
+      </div>
+    </div>
   </div>
 </div>
 

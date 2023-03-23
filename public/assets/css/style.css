@@ -48,3 +48,8 @@ body{
   display: flex;
   justify-content: center;
 }
+
+
+.commentaire, .add--commentaire{
+  background-color: rgb(242, 239, 239);
+}
