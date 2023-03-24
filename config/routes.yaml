@@ -7,3 +7,43 @@ controllers:
 homepage:
     path: /
     controller: App\Controller\HomeController
+
+articles:
+    path: /articles
+    controller: App\Controller\ArticlesController
+
+categories:
+    path: /categories
+    controller: App\Controller\CategorieController
+
+admin: 
+    path: /admin
+    controller: App\Controller\AdminController
+    
+admin_nouveau:
+    path: /admin/nouveau
+    controller: App\Controller\AdminController::new
+
+admin_editer:
+    path: /admin/editer/{id}
+    controller: App\Controller\AdminController::editer
+
+admin_supprimer:
+    path: /admin/supprimer/{id}
+    controller: App\Controller\AdminController::supprimer
+
+profil:
+    path: /profil
+    controller: App\Controller\ProfilController::index
+
+profil_ajouter:
+    path: /profil/ajouter/{id}
+    controller: App\Controller\ProfilController::ajouterJeu
+
+profil_supprimer:
+    path: /profil/supprimer/{id}
+    controller: App\Controller\ProfilController::supprimerJeu
+
+profil_vider:
+    path: /profil/vider
+    controller: App\Controller\ProfilController::vider

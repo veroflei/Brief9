@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard!{% endblock %}
+
+{% block body %}
+
+{% include "header.html.twig" %}
+
+<div class="container mt-5 text-center">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="title">espace admin</h1>
+    </div>
+  </div>
+  <div class="row mt-3 m-b5">
+    <div class="col-12">
+      <div class="count">
+        <p>Il y a {{ jeux.getTotalItemCount }} jeux dans votre base de donnée</p>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3 m-b5">
+    <div class="col-12">
+      <div class="count">
+        <a href="{{ path('admin_nouveau') }}" class="btn btn-secondary">Ajouter un nouveau Jeu</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for message in app.flashes('success')%}
+<div class="alert alert-success">
+  {{ message }}
+</div>
+{% endfor %}
+
+<div class="container-fluid mt-5 ">
+  <div class="row">
+    <div class="col-md-12 ">
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Note</th>
+            <th>URL d'achat</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for jeu in jeux %}
+          <tr>
+            <td><img src="{{'/' ~ jeu.image}}" alt="{{ jeu.titre }}" class="img-fluid"></td>
+            <td>{{ jeu.id }}</td>
+            <td>{{ jeu.titre }}</td>
+            <td>{{ jeu.description|slice(0, 40) ~ '...' }}</td>
+            <td>{{ jeu.notemoyenne }}</td>
+            <td><a href="{{ jeu.url }}" target="_blank">{{ jeu.url|slice(0, 40) ~ '...' }}</a></td>
+            <td>
+              <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-success btn-sm"><i
+                  class="bi bi-eye"></i></a>
+              <a href="{{ path('admin_editer', {'id': jeu.id}) }}" class="btn btn-warning btn-sm"><i
+                  class="bi bi-pencil"></i></a>
+              <a href="{{ path('admin_supprimer', {'id': jeu.id}) }}" class="btn btn-danger btn-sm"><i
+                  class="bi bi-trash"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="navigation d-flex justify-content-center mt-5">
+        {{ knp_pagination_render(jeux) }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "footer.html.twig" %}
+
+{% endblock %}

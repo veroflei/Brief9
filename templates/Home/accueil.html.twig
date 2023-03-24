@@ -2,12 +2,62 @@
 
 {% block body %}
 
-    {% include "header.html.twig" %}
-    
-    {% block title %} <H1>Bienvenue sur notre site de jeux videos</H1> {% endblock %}
-    
-    <p>Bienvenue sur notre site de jeux videos</p>
-    
-    {% include "footer.html.twig" %}
+{% include "header.html.twig" %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 text-center">
+      {% block title %} <H1 class="title">Bienvenue sur notre site pour collections vos jeux videos préférés</H1> {%
+      endblock %}
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12 text-center">
+      <p>Retrouvez ici les derniers jeux à la une</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          {% for jeu in jeux %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if loop.first
+            %}class="active" {% endif %}></li>
+          {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+          {% for jeu in jeux %}
+          <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <img class="d-block w-100" src="{{ jeu.image }}" alt="{{ jeu.titre }}">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{ jeu.titre }}</h5>
+              <p>{{ jeu.description }}</p>
+              <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-secondary stretched-link">Voir le
+                jeu</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% include "footer.html.twig" %}
 
 {% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un jeu!{% endblock %}
+
+{% block body %}
+
+{% include "header.html.twig" %}
+
+<div class="container mt-5">
+
+    <h1 class="mt-4 text-center title">Editer un jeu</h1>
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.titre) }}
+        {{ form_widget(form.titre) }}
+        <div class="form-error">
+            {{ form_errors(form.titre) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.URL) }}
+        {{ form_widget(form.URL) }}
+        <div class="form-error">
+            {{ form_errors(form.URL) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        <div class="form-error">
+            {{ form_errors(form.description) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image) }}
+        <div class="form-error">
+            {{ form_errors(form.image) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.notemoyenne) }}
+        {{ form_widget(form.notemoyenne) }}
+        <div class="form-error">
+            {{ form_errors(form.notemoyenne) }}
+        </div>
+    </div>
+
+    <div class="form-group mt-3 mb-2">
+        {{ form_label(form.categorie) }}
+        {{ form_widget(form.categorie) }}
+        <div class="form-error">
+            {{ form_errors(form.categorie) }}
+        </div>
+    </div>
+
+    <div class="form-group d-flex justify-content-center">
+        {{ form_row(form.submit)}}
+    </div>
+
+</div>
+{{ form_end(form) }}
+</div>
+
+<div class="row mt-5">
+    <div class="col-12 d-flex justify-content-center">
+        <a style="text-decoration:none; color:rgb(201, 35, 35)" class="text" href="{{ path('admin_index') }}"><i
+                class="bi bi-arrow-left-circle fs-4 align-middle"></i></span> Retour</a>
+    </div>
+</div>
+
+{% include "footer.html.twig" %}
+
+{% endblock %}

@@ -19,11 +19,8 @@ class Avis
     #[ORM\Column(length: 500)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?bool $moderation = null;
-
     #[ORM\ManyToOne(inversedBy: 'avis')]
-    private ?utilisateur $utilisateur = null;
+    private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?Jeux $jeux = null;
@@ -57,24 +54,12 @@ class Avis
         return $this;
     }
 
-    public function isModeration(): ?bool
-    {
-        return $this->moderation;
-    }
-
-    public function setModeration(bool $moderation): self
-    {
-        $this->moderation = $moderation;
-
-        return $this;
-    }
-
-    public function getUtilisateur(): ?utilisateur
+    public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
     }
 
-    public function setUtilisateur(?utilisateur $utilisateur): self
+    public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Jeux;
+use App\Repository\JeuxRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,6 +22,9 @@ class Categorie
 
     #[ORM\ManyToMany(targetEntity: Jeux::class, mappedBy: 'categorie')]
     private Collection $jeuxes;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -66,6 +71,18 @@ class Categorie
         if ($this->jeuxes->removeElement($jeux)) {
             $jeux->removeCategorie($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ jeu.titre }} {% endblock %}
+
+{% block body %}
+
+{% include "header.html.twig" %}
+
+<div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 class="title">{{ jeu.titre }}</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <hr>
+  <div class="row justify-content-center mt-4 g-5">
+    <div class="col-md-12 ">
+      <div class="card mb-3" transition: all ease-in 1s;>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="{{'/' ~ jeu.image}}" class="img-fluid" alt="Image">
+          </div>
+          <div class="col-md-6 ">
+            <div class="card-body" transition: all ease-in 1s;>
+              <h5 class="card-title text-center">{{ jeu.titre }}</h5>
+              <p class="card-text">{{ jeu.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Note : {{ jeu.notemoyenne }}</h5>
+          <a href="{{ jeu.url }}" class="btn btn-secondary">Acheter</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card commentaire">
+        <div class="card-body text-center">
+             {% for commentaire in commentaires %}
+             <h5>{{ commentaire.utilisateur.pseudo }}</h5>
+             <hr>
+            <div class="avis">
+              <div class="note">
+                <h4>{{ commentaire.note }} / 10</h4>
+              </div>
+              <div class="description">
+                <p>{{ commentaire.description }}</p>
+              </div>
+            </div>
+            {% endfor %} 
+        </div>
+      </div>
+    </div>
+       
+    <div class="col-md-12">
+      <div class="card add--commentaire">
+          <div class="card-body text-center">
+            <h2 class="card-title">Ajouter un commentaire</h2>
+            <hr>
+            {{ form_start(avisForm) }}
+            <div class="form-group">
+              {{ form_label(avisForm.utilisateur) }}
+              {{ form_widget(avisForm.utilisateur) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_label(avisForm.note) }}
+              {{ form_widget(avisForm.note) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_label(avisForm.description) }}
+              {{ form_widget(avisForm.description) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_widget(avisForm.envoyer) }}
+            </div>
+            {{ form_end(avisForm) }}
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% include "footer.html.twig" %}
+
+{% endblock %}

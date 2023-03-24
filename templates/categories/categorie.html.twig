@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.titre }}{% endblock %}
+
+{% block body %}
+
+{% include "header.html.twig" %}
+
+<div class="container mt-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="title">{{ categorie.titre }}</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <hr>
+  <div class="row row-cols-1 row-cols-md-3 mt-4 g-5 justify-content-center">
+    {% if jeux is not null %}
+    {% for jeu in jeux %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+        <img class="card-img-top" src="{{ '/' ~ jeu.image }}" alt="{{ jeu.titre }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ jeu.titre }}</h5>
+          <p class="card-text">{{ jeu.description|slice(0, 60) ~ '...' }}</p>
+          <a href="{{ path('articles_article', {'id': jeu.id}) }}" class="btn btn-primary stretched-link">Voir le
+            jeu</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Aucun jeu trouvé pour cette catégorie.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
